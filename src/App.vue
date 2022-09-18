@@ -1,23 +1,39 @@
-<script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite TESTE" />
-  <h1>testeeee</h1>
-  <p>co jeeeeeeeeggrrg</p>
+  <LoadingSpinner></LoadingSpinner>
+    <component :is="layout">
+      <router-view />
+    </component>
+  <ErrorMessage></ErrorMessage>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<script lang="ts">
+import {defineComponent, computed, markRaw} from 'vue';
+import ErrorMessage from '@/components/ErrorMessage.vue';
+import LoadingSpinner from '@/components/LoadingSpinner.vue';
+import LayoutAdmin from '@/layout/LayoutAdmin.vue';
+import {LayoutEnum} from '@/layout/LayoutEnum';
+import LayoutPublic from '@/layout/LayoutPublic.vue';
+import router from '@/router';
+
+export default defineComponent({
+  components: {
+    LoadingSpinner,
+    ErrorMessage,
+  },
+  setup() {
+    const layout = computed(() => {
+      const layoutName = router.currentRoute.value.meta.layout;
+      let layoutComponent;
+      if (layoutName === LayoutEnum.ADMIN) {
+        layoutComponent = LayoutAdmin;
+      } else {
+        layoutComponent = LayoutPublic;
+      }
+      return markRaw(layoutComponent);
+    });
+    return {
+      layout,
+    };
+  },
+});
+</script>
