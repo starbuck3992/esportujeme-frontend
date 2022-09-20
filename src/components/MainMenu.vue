@@ -1,5 +1,5 @@
 <template>
-  <Disclosure as="header" class="bg-gray-800" v-slot="{ open }">
+  <Disclosure as="header" class="bg-[#161417] py-10" v-slot="{ open }">
     <div class="mx-auto max-w-full lg:divide-y lg:divide-gray-700">
       <div class="relative flex h-16 justify-between px-10">
         <div class="relative z-10 flex px-2 lg:px-0">
@@ -8,14 +8,31 @@
           </div>
         </div>
         <div class="relative z-0 flex flex-1 items-center justify-center px-2 sm:absolute sm:inset-0">
-          <div class="w-full sm:max-w-xs">
-            <label for="search" class="sr-only">Search</label>
-            <div class="relative">
-              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <MagnifyingGlassIcon class="h-5 w-5 text-gray-400" aria-hidden="true" />
-              </div>
-              <input id="search" name="search" class="block w-full rounded-md border border-transparent bg-gray-700 py-2 pl-10 pr-3 text-sm placeholder-gray-400 focus:border-white focus:bg-white focus:text-gray-900 focus:placeholder-gray-500 focus:outline-none focus:ring-white sm:text-sm" placeholder="Search" type="search" />
-            </div>
+          <div class="hidden lg:block">
+            <nav class="flex lg:space-x-2 lg:py-2 px-10 mx-auto" aria-label="Global">
+              <li v-for="item in navigation" :key="item.name" class="relative block uppercase font-medium group">
+                <a :href="item.href"
+                  :class="[item.current ? 'before:opacity-100 after:opacity-100 text-[#ff8503]' :
+                    'text-gray-100 group-hover:text-[#ff8503] before:opacity-0 after:opacity-0',
+                    'rounded-md py-2 px-3 inline-flex items-center text-sm font-medium before:z-30 before:skew-x-12 before:group-hover:opacity-100 before:absolute before:-left-2 before:bottom-0 before:w-full before:h-1 before:bg-[#ff8503] before:ease-linear before:duration-300 after:absolute after:bg-[#1a1b21] after:left-0 after:right-0 after:top-0 after:w-full after:h-full after:-skew-x-12 after:m-auto after:ease-linear after:duration-300 after:group-hover:opacity-100']">
+                  <span class="z-10 m-auto p-4 font-bold">{{ item.name }}</span>
+                </a>
+                <ul v-show="item.subMenu" id="subMenu" class="absolute z-10 hidden -left-2 group-hover:block group-hover:opacity-100 group-hover:top-[100%] opacity-0 p-4 right-0 top-[0%] w-56 border border-gray-800 shadow-2xl scale-x-100 ease-in-out duration-300 bg-[#161417]">
+                  <li class="block ml-0 text-left">
+                    <a class="text-white font-medium leading-10 pr-6 pb-4 uppercase hover:opacity-100 ease-in-out duration-300 cursor-pointer hover:text-[#ff8503]">SUMBETU POLOZKA</a>
+                  </li>
+                  <li class="block ml-0 text-left">
+                    <a class="text-white font-medium leading-10 pr-6 pb-4 uppercase hover:opacity-100 ease-in-out duration-300 cursor-pointer hover:text-[#ff8503]">SUMBETU POLOZKA</a>
+                  </li>
+                  <li class="block ml-0 text-left">
+                    <a class="text-white font-medium leading-10 pr-6 pb-4 uppercase hover:opacity-100 ease-in-out duration-300 cursor-pointer hover:text-[#ff8503]">SUMBETU POLOZKA</a>
+                  </li>
+                  <li class="block ml-0 text-left">
+                    <a class="text-white font-medium leading-10 pr-6 pb-4 uppercase hover:opacity-100 ease-in-out duration-300 cursor-pointer hover:text-[#ff8503]">SUMBETU POLOZKA</a>
+                  </li>
+                </ul>
+              </li>
+            </nav>
           </div>
         </div>
         <div class="relative z-10 flex items-center lg:hidden">
@@ -50,30 +67,6 @@
           </Menu>
         </div>
       </div>
-      <nav class="hidden lg:flex lg:space-x-2 lg:py-2 px-10" aria-label="Global">
-        <li v-for="item in navigation" :key="item.name" class="relative block uppercase font-medium group">
-          <a :href="item.href"
-            :class="[item.current ? 'before:opacity-100 after:opacity-100 text-[#ff8503]' :
-              'text-gray-100 hover:text-[#ff8503] before:opacity-0 after:opacity-0',
-              'rounded-md py-2 px-3 inline-flex items-center text-sm font-medium before:z-10 before:skew-x-12 before:hover:opacity-100 before:absolute before:-left-2 before:bottom-0 before:w-full before:h-1 before:bg-[#ff8503] before:ease-linear before:duration-300 after:absolute after:bg-[#1a1b21] after:left-0 after:right-0 after:top-0 after:w-full after:h-full after:-skew-x-12 after:m-auto after:ease-linear after:duration-300 after:hover:opacity-100']">
-            <span class="z-10 m-auto p-4 font-bold">{{ item.name }}</span>
-          </a>
-          <ul v-show="item.subMenu" id="subMenu" class="absolute z-10 block -left-2 group-hover:opacity-100 group-hover:top-[100%] opacity-0 p-4 right-0 top-[10%] w-56 border border-gray-600 shadow-2xl scale-x-100 ease-in-out duration-300">
-            <li class="block ml-0 text-left">
-              <a class="text-white font-medium leading-10 pr-6 pb-4 uppercase opacity-70 hover:opacity-100 ease-in-out duration-300 cursor-pointer">SUMBETU POLOZKA</a>
-            </li>
-            <li class="block ml-0 text-left">
-              <a class="text-white font-medium leading-10 pr-6 pb-4 uppercase opacity-70 hover:opacity-100 ease-in-out duration-300 cursor-pointer">SUMBETU POLOZKA</a>
-            </li>
-            <li class="block ml-0 text-left">
-              <a class="text-white font-medium leading-10 pr-6 pb-4 uppercase opacity-70 hover:opacity-100 ease-in-out duration-300 cursor-pointer">SUMBETU POLOZKA</a>
-            </li>
-            <li class="block ml-0 text-left">
-              <a class="text-white font-medium leading-10 pr-6 pb-4 uppercase opacity-70 hover:opacity-100 ease-in-out duration-300 cursor-pointer">SUMBETU POLOZKA</a>
-            </li>
-          </ul>
-        </li>
-      </nav>
     </div>
 
     <DisclosurePanel as="nav" class="lg:hidden" aria-label="Global">
