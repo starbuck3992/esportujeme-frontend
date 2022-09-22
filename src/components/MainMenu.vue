@@ -1,6 +1,6 @@
 <template>
-  <Disclosure as="header" class="bg-[#161417] py-10" v-slot="{ open }">
-    <div class="mx-auto max-w-full lg:divide-y lg:divide-gray-700">
+  <Disclosure as="header" class="bg-[#212529] py-10" v-slot="{ open }">
+    <div class="mx-auto max-w-full">
       <div class="relative flex h-16 justify-between px-10">
         <div class="relative z-10 flex px-2 lg:px-0">
           <div class="flex flex-shrink-0 items-center">
