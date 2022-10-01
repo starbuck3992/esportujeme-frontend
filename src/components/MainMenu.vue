@@ -1,10 +1,14 @@
 <template>
-  <Disclosure as="header" class="bg-[#212529] py-10" v-slot="{ open }">
-    <div class="mx-auto max-w-full">
+  <LogoutComponent v-if="userStore.loggedIn" class="text-white text-3xl"/>
+  <button v-if="!userStore.loggedIn" @click="openModal(ModalEnum.LOGIN)" class="text-white text-3xl">Login</button>
+  <button v-if="!userStore.loggedIn" @click="openModal(ModalEnum.REGISTER)" class="text-white text-3xl">Register</button>
+  <Disclosure as="header" class="bg-[#161417] py-10" v-slot="{ open }">
+    <div class="mx-auto max-w-full lg:divide-y lg:divide-gray-700">
       <div class="relative flex h-16 justify-between px-10">
         <div class="relative z-10 flex px-2 lg:px-0">
           <div class="flex flex-shrink-0 items-center">
-            <img class="block h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
+            <img class="block h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                 alt="Your Company"/>
           </div>
         </div>
         <div class="relative z-0 flex flex-1 items-center justify-center px-2 sm:absolute sm:inset-0">
@@ -12,23 +16,28 @@
             <nav class="flex lg:space-x-2 lg:py-2 px-10 mx-auto" aria-label="Global">
               <li v-for="item in navigation" :key="item.name" class="relative block uppercase font-medium group">
                 <a :href="item.href"
-                  :class="[item.current ? 'before:opacity-100 after:opacity-100 text-[#ff8503]' :
+                   :class="[item.current ? 'before:opacity-100 after:opacity-100 text-[#ff8503]' :
                     'text-gray-100 group-hover:text-[#ff8503] before:opacity-0 after:opacity-0',
                     'rounded-md py-2 px-3 inline-flex items-center text-sm font-medium before:z-30 before:skew-x-12 before:group-hover:opacity-100 before:absolute before:-left-2 before:bottom-0 before:w-full before:h-1 before:bg-[#ff8503] before:ease-linear before:duration-300 after:absolute after:bg-[#1a1b21] after:left-0 after:right-0 after:top-0 after:w-full after:h-full after:-skew-x-12 after:m-auto after:ease-linear after:duration-300 after:group-hover:opacity-100']">
                   <span class="z-10 m-auto p-4 font-bold">{{ item.name }}</span>
                 </a>
-                <ul v-show="item.subMenu" id="subMenu" class="absolute z-10 hidden -left-2 group-hover:block group-hover:opacity-100 group-hover:top-[100%] opacity-0 p-4 right-0 top-[0%] w-56 border border-gray-800 shadow-2xl scale-x-100 ease-in-out duration-300 bg-[#161417]">
+                <ul v-show="item.subMenu" id="subMenu"
+                    class="absolute z-10 hidden -left-2 group-hover:block group-hover:opacity-100 group-hover:top-[100%] opacity-0 p-4 right-0 top-[0%] w-56 border border-gray-800 shadow-2xl scale-x-100 ease-in-out duration-300 bg-[#161417]">
                   <li class="block ml-0 text-left">
-                    <a class="text-white font-medium leading-10 pr-6 pb-4 uppercase hover:opacity-100 ease-in-out duration-300 cursor-pointer hover:text-[#ff8503]">SUMBETU POLOZKA</a>
+                    <a class="text-white font-medium leading-10 pr-6 pb-4 uppercase hover:opacity-100 ease-in-out duration-300 cursor-pointer hover:text-[#ff8503]">SUMBETU
+                      POLOZKA</a>
                   </li>
                   <li class="block ml-0 text-left">
-                    <a class="text-white font-medium leading-10 pr-6 pb-4 uppercase hover:opacity-100 ease-in-out duration-300 cursor-pointer hover:text-[#ff8503]">SUMBETU POLOZKA</a>
+                    <a class="text-white font-medium leading-10 pr-6 pb-4 uppercase hover:opacity-100 ease-in-out duration-300 cursor-pointer hover:text-[#ff8503]">SUMBETU
+                      POLOZKA</a>
                   </li>
                   <li class="block ml-0 text-left">
-                    <a class="text-white font-medium leading-10 pr-6 pb-4 uppercase hover:opacity-100 ease-in-out duration-300 cursor-pointer hover:text-[#ff8503]">SUMBETU POLOZKA</a>
+                    <a class="text-white font-medium leading-10 pr-6 pb-4 uppercase hover:opacity-100 ease-in-out duration-300 cursor-pointer hover:text-[#ff8503]">SUMBETU
+                      POLOZKA</a>
                   </li>
                   <li class="block ml-0 text-left">
-                    <a class="text-white font-medium leading-10 pr-6 pb-4 uppercase hover:opacity-100 ease-in-out duration-300 cursor-pointer hover:text-[#ff8503]">SUMBETU POLOZKA</a>
+                    <a class="text-white font-medium leading-10 pr-6 pb-4 uppercase hover:opacity-100 ease-in-out duration-300 cursor-pointer hover:text-[#ff8503]">SUMBETU
+                      POLOZKA</a>
                   </li>
                 </ul>
               </li>
@@ -37,80 +46,121 @@
         </div>
         <div class="relative z-10 flex items-center lg:hidden">
           <!-- Mobile menu button -->
-          <DisclosureButton class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+          <DisclosureButton
+              class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
             <span class="sr-only">Open menu</span>
-            <Bars3Icon v-if="!open" class="block h-6 w-6" aria-hidden="true" />
-            <XMarkIcon v-else class="block h-6 w-6" aria-hidden="true" />
+            <Bars3Icon v-if="!open" class="block h-6 w-6" aria-hidden="true"/>
+            <XMarkIcon v-else class="block h-6 w-6" aria-hidden="true"/>
           </DisclosureButton>
         </div>
         <div class="hidden lg:relative lg:z-10 lg:ml-4 lg:flex lg:items-center">
-          <button type="button" class="flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+          <button type="button"
+                  class="flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
             <span class="sr-only">View notifications</span>
-            <BellIcon class="h-6 w-6" aria-hidden="true" />
+            <BellIcon class="h-6 w-6" aria-hidden="true"/>
           </button>
 
           <!-- Profile dropdown -->
-          <Menu as="div" class="relative ml-4 flex-shrink-0">
+          <MainMenu as="div" class="relative ml-4 flex-shrink-0">
             <div>
-              <MenuButton class="flex rounded-full bg-gray-800 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+              <MenuButton
+                  class="flex rounded-full bg-gray-800 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                 <span class="sr-only">Open user menu</span>
-                <img class="h-8 w-8 rounded-full" :src="user.imageUrl" alt="" />
+                <img class="h-8 w-8 rounded-full" :src="user.imageUrl" alt=""/>
               </MenuButton>
             </div>
-            <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-              <MenuItems class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <transition enter-active-class="transition ease-out duration-100"
+                        enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
+                        leave-active-class="transition ease-in duration-75"
+                        leave-from-class="transform opacity-100 scale-100"
+                        leave-to-class="transform opacity-0 scale-95">
+              <MenuItems
+                  class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
-                  <a :href="item.href" :class="[active ? 'bg-gray-100' : '', 'block py-2 px-4 text-sm text-gray-700']">{{ item.name }}</a>
+                  <a :href="item.href" :class="[active ? 'bg-gray-100' : '', 'block py-2 px-4 text-sm text-gray-700']">{{
+                      item.name
+                    }}</a>
                 </MenuItem>
               </MenuItems>
             </transition>
-          </Menu>
+          </MainMenu>
         </div>
       </div>
     </div>
 
     <DisclosurePanel as="nav" class="lg:hidden" aria-label="Global">
       <div class="space-y-1 px-2 pt-2 pb-3">
-        <DisclosureButton v-for="item in navigation" :key="item.name" as="a" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block rounded-md py-2 px-3 text-base font-medium']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</DisclosureButton>
+        <DisclosureButton v-for="item in navigation" :key="item.name" as="a" :href="item.href"
+                          :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block rounded-md py-2 px-3 text-base font-medium']"
+                          :aria-current="item.current ? 'page' : undefined">{{ item.name }}
+        </DisclosureButton>
       </div>
       <div class="border-t border-gray-700 pt-4 pb-3">
         <div class="flex items-center px-4">
           <div class="flex-shrink-0">
-            <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt="" />
+            <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt=""/>
           </div>
           <div class="ml-3">
             <div class="text-base font-medium text-white">{{ user.name }}</div>
             <div class="text-sm font-medium text-gray-400">{{ user.email }}</div>
           </div>
-          <button type="button" class="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+          <button type="button"
+                  class="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
             <span class="sr-only">View notifications</span>
-            <BellIcon class="h-6 w-6" aria-hidden="true" />
+            <BellIcon class="h-6 w-6" aria-hidden="true"/>
           </button>
         </div>
         <div class="mt-3 space-y-1 px-2">
-          <DisclosureButton v-for="item in userNavigation" :key="item.name" as="a" :href="item.href" class="block rounded-md py-2 px-3 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">{{ item.name }}</DisclosureButton>
+          <DisclosureButton v-for="item in userNavigation" :key="item.name" as="a" :href="item.href"
+                            class="block rounded-md py-2 px-3 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">
+            {{ item.name }}
+          </DisclosureButton>
         </div>
       </div>
     </DisclosurePanel>
   </Disclosure>
+  <LoginRegisterModal v-model:modal-type="modal" v-model:is-open="isLoginRegisterOpen"/>
 </template>
 
-<script>
-import {Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue';
-import {MagnifyingGlassIcon} from '@heroicons/vue/20/solid';
+<script lang="ts">
+import {Disclosure, DisclosureButton, DisclosurePanel, Menu as MainMenu, MenuButton, MenuItem, MenuItems} from '@headlessui/vue';
 import {Bars3Icon, BellIcon, XMarkIcon} from '@heroicons/vue/24/outline';
-import {defineComponent} from 'vue';
+import {defineComponent, ref} from 'vue';
+import LoginRegisterModal from '@/components/auth/LoginRegisterModal.vue';
+import LogoutComponent from '@/components/auth/LogoutComponent.vue';
+import {ModalEnum} from '@/enums/ModalEnum';
+import {useUserStore} from '@/stores/user';
 
 export default defineComponent({
   components: {
-    Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems, MagnifyingGlassIcon, Bars3Icon, BellIcon, XMarkIcon,
+    LogoutComponent,
+    LoginRegisterModal,
+    Disclosure,
+    DisclosureButton,
+    DisclosurePanel,
+    MainMenu,
+    MenuButton,
+    MenuItem,
+    MenuItems,
+    Bars3Icon,
+    BellIcon,
+    XMarkIcon,
   },
   setup() {
+    const modal = ref<ModalEnum>(ModalEnum.REGISTER);
+    const isLoginRegisterOpen = ref(false);
+    const userStore = useUserStore();
+
+    function openModal(modalType: ModalEnum) {
+      modal.value = modalType;
+      isLoginRegisterOpen.value = true;
+    }
+
     const user = {
       name: 'Tom Cook',
       email: 'tom@example.com',
       imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+          'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     };
     const navigation = [
       {name: 'Dashboard', href: '#', current: true, subMenu: false},
@@ -125,6 +175,11 @@ export default defineComponent({
     ];
     return {
       user, navigation, userNavigation,
+      isLoginRegisterOpen,
+      modal,
+      ModalEnum,
+      openModal,
+      userStore,
     };
   },
 });
