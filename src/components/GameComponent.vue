@@ -1,7 +1,7 @@
 <template>
 <!-- GAMES (Z TOHOTO PAK UDĚLAT COMPONENTU) -->
   <div class="relative w-full h-full max-w-[100rem] mx-auto">
-    <div class="grid grid-cols-3 md:grid-cols-5 mx-auto gap-8 gap-y-10 px-20 relative">
+    <div class="grid grid-cols-3 md:grid-cols-5 mx-auto gap-2 gap-y-5 sm:gap-8 sm:gap-y-10 px-8 sm:px-20 relative">
       <div
         class="relative overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-800 sm:rounded-2xl -rotate-2">
         <img alt=""

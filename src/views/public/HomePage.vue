@@ -20,6 +20,13 @@
   <!-- ALL GAMES TOURNAMETS -->
   <GameComponent/>
   <!-- Next tournament section -->
+  <h1 :class="[
+          'xl:text-8xl xl:leading-tight xl:tracking-tighter',
+          'md:text-5xl md:leading-tight md:tracking-tight',
+          'text-3xl font-bold text-white font-oswald',
+          'mx-auto mt-10 mb-1 lg:mb-10']">
+          Další turnaj startuje za:
+  </h1>
   <NextTournament/>
 </template>
 
