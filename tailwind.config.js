@@ -4,7 +4,11 @@ module.exports = {
     './src/**/*.{vue,js,jsx,ts,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        oswald: '"Oswald", sans-serif;',
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/aspect-ratio'),

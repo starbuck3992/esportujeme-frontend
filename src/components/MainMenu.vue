@@ -1,5 +1,5 @@
 <template>
-  <Disclosure as="header" class="bg-[#212529] py-10" v-slot="{ open }">
+  <Disclosure as="header" class="bg-[#212529] py-8" v-slot="{ open }">
     <div class="mx-auto max-w-full">
       <div class="relative flex h-16 justify-between px-10">
         <div class="relative z-10 flex px-2 lg:px-0">
@@ -9,7 +9,7 @@
         </div>
         <div class="relative z-0 flex flex-1 items-center justify-center px-2 sm:absolute sm:inset-0">
           <div class="hidden lg:block">
-            <nav class="flex lg:space-x-2 lg:py-2 px-10 mx-auto" aria-label="Global">
+            <nav class="flex lg:space-x-2 lg:py-2 px-10 mx-auto font-oswald" aria-label="Global">
               <li v-for="item in navigation" :key="item.name" class="relative block uppercase font-medium group">
                 <a :href="item.href"
                   :class="[item.current ? 'before:opacity-100 after:opacity-100 text-[#ff8503]' :
