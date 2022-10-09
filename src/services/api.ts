@@ -1,27 +1,23 @@
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
-// import {useLoadingStore} from '@/stores/loading';
-// import {useUserStore} from '@/stores/user';
+import router from '@/router';
+import {ROUTES} from '@/router/routes';
+import store from '@/stores/store';
+import {useUserStore} from '@/stores/user';
 
 class Api {
   private apiInstance: AxiosInstance;
-  // private loadingStore: any;
-  // private authManagerStore: any;
 
   constructor() {
     this.apiInstance = axios.create({
-      baseURL: import.meta.env.API_URL,
+      baseURL: import.meta.env.VITE_API_URL,
       withCredentials: true,
     });
 
     this.apiInstance.interceptors.request.use(this.handleRequestSuccess, this.handleRequestError);
     this.apiInstance.interceptors.response.use(this.handleResponseSuccess, this.handleResponseError);
-
-    // this.loadingStore = useLoadingStore();
-    // this.authManagerStore = useUserStore();
   }
 
   handleRequestSuccess(config: AxiosRequestConfig): AxiosRequestConfig {
-    // this.loadingStore.updateLoading();
     return config;
   }
 
@@ -30,60 +26,60 @@ class Api {
   }
 
   handleResponseSuccess(response: AxiosResponse): AxiosResponse {
-    // this.loadingStore.updateLoading();
     return response;
   }
 
   async handleResponseError(error: any): Promise<any> {
-    // if ([401, 403, 419].includes(error.response.status)) {
-    //   try {
-    //     if (this.authManagerStore.loggedIn) {
-    //       await this.authManagerStore.logout();
-    //       await router.push({name: 'homeIndex'});
-    //     }
-    //     await router.push({name: 'homeIndex'});
-    //   } catch (e) {
-    //     console.log(error);
-    //   }
-    // }
+    const userStore = useUserStore(store);
+    if ([401, 403, 419].includes(error.response.status)) {
+      try {
+        if (userStore.loggedIn) {
+          userStore.clearUser();
+          await this.logout();
+        }
+        await router.push({name: ROUTES.HOME_PAGE});
+      } catch (e) {
+        console.error(e);
+      }
+    }
     return Promise.reject(error);
   }
 
   sanctumCookie() {
-    return this.apiInstance.get('/register');
+    return this.apiInstance.get('/sanctum/csrf-cookie');
   }
 
-  userRegister(payload) {
+  register(payload) {
     return this.apiInstance.post('/register', payload);
   }
 
-  userLogin(payload) {
+  login(payload) {
     return this.apiInstance.post('/login', payload);
   }
 
-  userLogout() {
+  logout() {
     return this.apiInstance.post('/logout');
   }
 
-  userForgotPassword(payload) {
+  forgotPassword(payload) {
     return this.apiInstance.post('/forgot-password', payload);
   }
 
-  userResetPassword(payload) {
+  resetPassword(payload) {
     return this.apiInstance.post('/reset-password', payload);
   }
 
-  userUpdatePassword(payload) {
+  updatePassword(payload) {
     return this.apiInstance.put('/user/password', payload);
   }
 
-  userSocialAuthentication(provider) {
-    return this.apiInstance.get(`/api/authorize/${provider}/redirect`);
+  socialAuthentication(provider) {
+    return this.apiInstance.get(`/authorize/${provider}/redirect`);
   }
 
-  userSocialLogin(payload) {
-    return this.apiInstance.get(`/api/authorize/${payload.provider}/login`, payload.parameters);
+  socialLogin(payload) {
+    return this.apiInstance.get(`/authorize/${payload.provider}/login`, payload.parameters);
   }
 }
 
-export default new Api;
+export default new Api();

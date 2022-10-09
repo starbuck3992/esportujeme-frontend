@@ -1,13 +1,12 @@
 import {RouteRecordRaw} from 'vue-router';
+import SocialLogin from '@/components/auth/SocialLogin.vue';
 import {LayoutEnum} from '@/layout/LayoutEnum';
 import DashboardPage from '@/views/admin/DashboardPage.vue';
-import RegisterPage from '@/views/auth/RegisterPage.vue';
 import HomePage from '@/views/public/HomePage.vue';
 
 export enum ROUTES {
   ADMIN_DASHBOARD = 'routesAdminDashboard',
   HOME_PAGE = 'routesHomePage',
-  REGISTER_PAGE = 'routesRegisterPage',
 }
 
 const routes = [
@@ -32,9 +31,12 @@ const routes = [
         component: HomePage,
       },
       {
-        path: 'register',
-        name: ROUTES.REGISTER_PAGE,
-        component: RegisterPage,
+        path: 'authorize/:provider/callback',
+        props: (route) => ({
+          provider: route.params.provider,
+        }),
+        name: 'socialLogin',
+        component: SocialLogin,
       },
     ],
   },
