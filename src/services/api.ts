@@ -80,6 +80,10 @@ class Api {
   socialLogin(payload) {
     return this.apiInstance.get(`/authorize/${payload.provider}/login`, payload.parameters);
   }
+
+  userSettings(id) {
+    return this.apiInstance.get(`/api/users/settings/${id}`);
+  }
 }
 
 export default new Api();

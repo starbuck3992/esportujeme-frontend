@@ -1,15 +1,15 @@
 import {defineStore} from 'pinia';
 
 interface State {
-    userId: number | null
-    nickName: string
-    avatar: string
+  userId: number | null
+  nickname: string
+  avatar: string
 }
 
 export const useUserStore = defineStore('user', {
   state: (): State => ({
     userId: null,
-    nickName: '',
+    nickname: '',
     avatar: '',
   }),
   getters: {
@@ -17,8 +17,8 @@ export const useUserStore = defineStore('user', {
   },
   actions: {
     updateUser(payload) {
-      this.userId = payload.userId;
-      this.nickName = payload.nickName;
+      this.userId = payload.id;
+      this.nickname = payload.nickname;
       this.avatar = payload.avatar;
     },
     clearUser() {

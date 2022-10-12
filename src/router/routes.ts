@@ -3,10 +3,19 @@ import SocialLogin from '@/components/auth/SocialLogin.vue';
 import {LayoutEnum} from '@/layout/LayoutEnum';
 import DashboardPage from '@/views/admin/DashboardPage.vue';
 import HomePage from '@/views/public/HomePage.vue';
+import UserIntegrationsPage from '@/views/public/user/UserIntegrationsPage.vue';
+import UserPasswordPage from '@/views/public/user/UserPasswordPage.vue';
+import UserProfilePage from '@/views/public/user/UserProfilePage.vue';
+import UserSettingsRouterView from '@/views/public/user/UserSettingsRouterView.vue';
 
 export enum ROUTES {
+  NOT_FOUND = 'routesNotFound',
   ADMIN_DASHBOARD = 'routesAdminDashboard',
   HOME_PAGE = 'routesHomePage',
+  USER_SETTINGS_ROUTER_VIEW = 'routesUserSettingsRouterView',
+  USER_PROFILE_PAGE = 'routesUserProfilePage',
+  USER_PASSWORD_PAGE = 'routesUserPasswordPage',
+  USER_INTEGRATIONS_PAGE = 'routesUserIntegrationsPage',
 }
 
 const routes = [
@@ -30,6 +39,29 @@ const routes = [
         name: ROUTES.HOME_PAGE,
         component: HomePage,
       },
+
+      {
+        path: 'settings',
+        name: ROUTES.USER_SETTINGS_ROUTER_VIEW,
+        component: UserSettingsRouterView,
+        children: [
+          {
+            path: 'profile',
+            name: ROUTES.USER_PROFILE_PAGE,
+            component: UserProfilePage,
+          },
+          {
+            path: 'password',
+            name: ROUTES.USER_PASSWORD_PAGE,
+            component: UserPasswordPage,
+          },
+          {
+            path: 'integrations',
+            name: ROUTES.USER_INTEGRATIONS_PAGE,
+            component: UserIntegrationsPage,
+          },
+        ],
+      },
       {
         path: 'authorize/:provider/callback',
         props: (route) => ({
@@ -42,8 +74,8 @@ const routes = [
   },
   {
     path: '/:pathMatch(.*)*',
-    name: 'not-found',
-    component: () => HomePage,
+    name: ROUTES.NOT_FOUND,
+    component: HomePage,
   },
 ];
 

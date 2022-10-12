@@ -1,5 +1,5 @@
 <template>
-  <div v-show="loading" class="flex justify-center items-center space-x-2 fixed inset-0 z-50 w-[95%] sm:max-w-7xl mx-auto">
+  <div v-show="loadingStore.loading" class="flex justify-center items-center space-x-2 fixed inset-0 z-50 w-[95%] sm:max-w-7xl mx-auto">
     <div class="spinner-grow
     inline-block w-8 h-8 bg-current rounded-full animate-bounce text-blue-900" role="status"></div>
     <div class="spinner-grow inline-block w-8 h-8 bg-current rounded-full animation-delay-100 animate-bounce text-blue-800" role="status"></div>
@@ -17,9 +17,10 @@ import {useLoadingStore} from '@/stores/loading';
 
 export default defineComponent({
   setup() {
-    const {loading} = useLoadingStore();
+    const loadingStore = useLoadingStore();
+
     return {
-      loading,
+      loadingStore,
     };
   },
 });

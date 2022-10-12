@@ -47,6 +47,7 @@ import {defineComponent, reactive, computed, ref} from 'vue';
 import SocialAuth from '@/components/auth/SocialAuth.vue';
 import {ModalEnum} from '@/enums/ModalEnum';
 import Api from '@/services/api';
+import {useLoadingStore} from '@/stores/loading';
 import {useUserStore} from '@/stores/user';
 import {handleError} from '@/utilities/handleError';
 
@@ -58,6 +59,7 @@ export default defineComponent({
   emits: ['onFinished', 'onModalChange'],
   setup(props, {emit} ) {
     const userStore = useUserStore();
+    const loadingStore = useLoadingStore();
     const error = ref<string>();
 
     const user = reactive({
@@ -82,16 +84,19 @@ export default defineComponent({
     }
 
     async function login() {
+      loadingStore.updateLoading();
+      error.value = '';
       try {
         if (await v$.value.$validate()) {
           await Api.sanctumCookie();
-          const data = await Api.login(user);
-          userStore.updateUser(data);
+          const response = await Api.login(user);
+          userStore.updateUser(response.data);
           emit('onFinished');
         }
       } catch (e: any) {
         error.value = handleError(e);
       }
+      loadingStore.updateLoading();
     }
 
     return {

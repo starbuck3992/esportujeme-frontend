@@ -34,7 +34,7 @@
         </div>
     </div>
 </template>
-<script>
+<script lang="ts">
 import {defineComponent, ref, onMounted, onUnmounted} from 'vue';
 
 export default defineComponent({
@@ -45,10 +45,10 @@ export default defineComponent({
     const strokeWidth = ref();
     // Timer
     const countDownToTime = new Date('Sep 27, 2023 18:53:00').getTime();
-    const remainingDays = ref(null);
-    const remainingHours = ref(null);
-    const remainingMinutes = ref(null);
-    const remainingSeconds = ref(null);
+    const remainingDays = ref<Number>(0);
+    const remainingHours = ref<Number>(0);
+    const remainingMinutes = ref<Number>(0);
+    const remainingSeconds = ref<Number>(0);
 
     function startTimer() {
       const timeNow = new Date().getTime();
@@ -79,7 +79,7 @@ export default defineComponent({
       window.removeEventListener('resize', onResize());
     });
 
-    function onResize(e) {
+    function onResize() {
       const width = window.innerWidth;
       if (width < 640) {
         r.value = 30;
