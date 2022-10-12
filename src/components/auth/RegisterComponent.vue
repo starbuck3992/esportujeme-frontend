@@ -151,8 +151,9 @@ export default defineComponent({
         }
       } catch (e: any) {
         error.value = handleError(e);
+      } finally {
+        loadingStore.updateLoading();
       }
-      loadingStore.updateLoading();
     }
 
     return {
