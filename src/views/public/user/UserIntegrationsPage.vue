@@ -127,7 +127,7 @@ export default defineComponent({
 
     onMounted(async () => {
       try {
-        user = await Api.userSettings();
+        //user = await Api.userSettings();
       } catch (e) {
         handleError(e);
       }
