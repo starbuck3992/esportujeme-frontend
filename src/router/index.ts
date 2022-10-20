@@ -10,12 +10,14 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const {loggedIn} = useUserStore();
 
-  if (to.matched.some((record) => record.meta.guest)) {
-    if (loggedIn) {
-      next('/');
-    } else {
-      next();
-    }
+  const canNavigate = to.matched.some(() => {
+    if (!loggedIn && to.meta.requiresAuth) {
+      return false;
+    } else return !(loggedIn && to.meta.guest);
+  });
+
+  if (!canNavigate) {
+    return next('/');
   } else {
     next();
   }

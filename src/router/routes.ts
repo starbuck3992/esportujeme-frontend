@@ -44,6 +44,9 @@ const routes = [
         path: 'settings',
         name: ROUTES.USER_SETTINGS_ROUTER_VIEW,
         component: UserSettingsRouterView,
+        meta: {
+          requiresAuth: true,
+        },
         children: [
           {
             path: 'profile',

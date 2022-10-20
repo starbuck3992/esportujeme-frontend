@@ -4,12 +4,14 @@
       <router-view v-model:layout="layout"/>
     </component>
   <ErrorMessage v-if="messageStore.isMessageSet"></ErrorMessage>
+  <SuccessMessage v-if="messageStore.isMessageSet"></SuccessMessage>
 </template>
 
 <script lang="ts">
 import {defineComponent, computed, markRaw} from 'vue';
 import ErrorMessage from '@/components/ErrorMessage.vue';
 import LoadingSpinner from '@/components/LoadingSpinner.vue';
+import SuccessMessage from '@/components/SuccessMessage.vue';
 import LayoutAdmin from '@/layout/LayoutAdmin.vue';
 import {LayoutEnum} from '@/layout/LayoutEnum';
 import LayoutPublic from '@/layout/LayoutPublic.vue';
@@ -18,6 +20,7 @@ import {useMessageStore} from '@/stores/message';
 
 export default defineComponent({
   components: {
+    SuccessMessage,
     LoadingSpinner,
     ErrorMessage,
   },

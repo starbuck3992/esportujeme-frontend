@@ -81,8 +81,18 @@ class Api {
     return this.apiInstance.get(`/authorize/${payload.provider}/login`, payload.parameters);
   }
 
-  userSettings(id) {
-    return this.apiInstance.get(`/api/users/settings/${id}`);
+  userSettings() {
+    return this.apiInstance.get('/api/users/settings');
+  }
+
+  updateUserSettings(payload) {
+    return this.apiInstance.post('/api/users/settings', payload);
+  }
+
+  uploadImage(payload) {
+    return this.apiInstance.post('/api/images', payload, {headers: {
+      'Content-Type': 'multipart/form-data',
+    }});
   }
 }
 
