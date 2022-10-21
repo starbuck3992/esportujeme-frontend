@@ -1,4 +1,4 @@
-import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
+import axios, {AxiosInstance, AxiosResponse} from 'axios';
 import router from '@/router';
 import {ROUTES} from '@/router/routes';
 import store from '@/stores/store';
@@ -12,17 +12,7 @@ class Api {
       baseURL: import.meta.env.VITE_API_URL,
       withCredentials: true,
     });
-
-    this.apiInstance.interceptors.request.use(this.handleRequestSuccess, this.handleRequestError);
     this.apiInstance.interceptors.response.use(this.handleResponseSuccess, this.handleResponseError);
-  }
-
-  handleRequestSuccess(config: AxiosRequestConfig): AxiosRequestConfig {
-    return config;
-  }
-
-  handleRequestError(error: any): Promise<any> {
-    return Promise.reject(error);
   }
 
   handleResponseSuccess(response: AxiosResponse): AxiosResponse {
@@ -74,15 +64,19 @@ class Api {
   }
 
   socialAuthentication(provider) {
-    return this.apiInstance.get(`/authorize/${provider}/redirect`);
+    return this.apiInstance.get(`/api/authorize/${provider}/redirect`);
   }
 
   socialLogin(payload) {
-    return this.apiInstance.get(`/authorize/${payload.provider}/login`, payload.parameters);
+    return this.apiInstance.get(`/api/authorize/${payload.provider}/login`, payload.parameters);
   }
 
   userSettings() {
     return this.apiInstance.get('/api/users/settings');
+  }
+
+  userProviders() {
+    return this.apiInstance.get('/api/users/providers');
   }
 
   updateUserSettings(payload) {

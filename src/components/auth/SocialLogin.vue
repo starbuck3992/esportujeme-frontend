@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>Probíhá přihlašování, počkejte chvíli.</h1>
+  <div class="flex flex-row justify-center text-center w-full">
+    <h1 class="text-3xl text-white text-center mt-4">Probíhá přihlašování, počkejte chvíli...</h1>
   </div>
 </template>
 

@@ -34,16 +34,12 @@
 import {defineComponent} from 'vue';
 import GameComponent from '@/components/GameComponent.vue';
 import NextTournament from '@/components/NextTournamentComponent.vue';
-import {useMessageStore} from '@/stores/message';
 export default defineComponent({
   components: {
     GameComponent, NextTournament,
   },
   setup() {
-    const messageStore = useMessageStore();
-
     return {
-      messageStore,
     };
   },
 });

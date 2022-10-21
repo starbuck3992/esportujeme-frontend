@@ -65,6 +65,7 @@ export default defineComponent({
     const user = reactive({
       email: '',
       password: '',
+      remember: true,
     });
 
     const rules = computed(() => ({

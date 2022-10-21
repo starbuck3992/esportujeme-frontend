@@ -3,29 +3,26 @@
     <component :is="layout">
       <router-view v-model:layout="layout"/>
     </component>
-  <ErrorMessage v-if="messageStore.isMessageSet"></ErrorMessage>
-  <SuccessMessage v-if="messageStore.isMessageSet"></SuccessMessage>
+  <ToastNotification v-if="notificationStore.isNotificationSet"></ToastNotification>
 </template>
 
 <script lang="ts">
 import {defineComponent, computed, markRaw} from 'vue';
-import ErrorMessage from '@/components/ErrorMessage.vue';
 import LoadingSpinner from '@/components/LoadingSpinner.vue';
-import SuccessMessage from '@/components/SuccessMessage.vue';
+import ToastNotification from '@/components/ToastNotification.vue';
 import LayoutAdmin from '@/layout/LayoutAdmin.vue';
 import {LayoutEnum} from '@/layout/LayoutEnum';
 import LayoutPublic from '@/layout/LayoutPublic.vue';
 import router from '@/router';
-import {useMessageStore} from '@/stores/message';
+import {useNotificationStore} from '@/stores/notification';
 
 export default defineComponent({
   components: {
-    SuccessMessage,
+    ToastNotification,
     LoadingSpinner,
-    ErrorMessage,
   },
   setup() {
-    const messageStore = useMessageStore();
+    const notificationStore = useNotificationStore();
     const layout = computed(() => {
       const layoutName = router.currentRoute.value.meta.layout;
       let layoutComponent;
@@ -38,7 +35,7 @@ export default defineComponent({
     });
 
     return {
-      messageStore,
+      notificationStore,
       layout,
     };
   },

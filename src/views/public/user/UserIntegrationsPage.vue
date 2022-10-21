@@ -1,6 +1,9 @@
 <template>
   <ul>
-    <li v-for="integration in integrations" :key="integration.id"></li>
+    <li v-for="integration in integrations" :key="integration.id">
+      <div>{{integration.name}}</div>
+      <div>{{integration.provider}}</div>
+    </li>
   </ul>
 </template>
 
@@ -22,8 +25,8 @@ export default defineComponent({
 
     async function loadData() {
       try {
-        const response = await Api.userSettings();
-        integrations.value = response.data.integrations;
+        const response = await Api.userProviders();
+        integrations.value = response.data;
       } catch (e) {
         handleError(e);
       }

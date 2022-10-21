@@ -1,6 +1,7 @@
-import {useMessageStore} from '@/stores/message';
+import {NotificationEnum} from '@/enums/NotificationEnum';
+import {useNotificationStore} from '@/stores/notification';
 
 export const handleSuccess = (message: string) => {
-  const messageStore = useMessageStore();
-  messageStore.setMessage(message);
+  const {setNotification} = useNotificationStore();
+  setNotification(NotificationEnum.SUCCESS, message);
 };
