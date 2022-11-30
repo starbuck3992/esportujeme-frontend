@@ -34,7 +34,6 @@ export default defineComponent({
   setup() {
     async function socialAuth(provider: ProviderEnum) {
       try {
-        await Api.sanctumCookie();
         const response = await Api.socialAuthentication(provider);
         window.location.href = response?.data.url;
       } catch (e) {

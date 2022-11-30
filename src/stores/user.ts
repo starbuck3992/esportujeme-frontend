@@ -4,6 +4,7 @@ interface State {
   userId: number | null
   nickname: string
   avatar: string
+  token: string
 }
 
 export const useUserStore = defineStore('user', {
@@ -11,6 +12,7 @@ export const useUserStore = defineStore('user', {
     userId: null,
     nickname: '',
     avatar: '',
+    token: '',
   }),
   getters: {
     loggedIn: (state) => state.userId !== null,
@@ -20,6 +22,8 @@ export const useUserStore = defineStore('user', {
       this.userId = payload.id;
       this.nickname = payload.nickname;
       this.avatar = payload.avatar;
+      this.token = payload.token;
+      console.log(this.$state);
     },
     clearUser() {
       this.$reset();

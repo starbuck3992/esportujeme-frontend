@@ -1,5 +1,5 @@
 <template>
-  <LogoutComponent v-if="userStore.loggedIn" class="text-white text-3xl"/>
+  <button v-if="userStore.loggedIn" @click="useLogoutFlow" class="text-white text-3xl">Odhlášení</button>
   <button v-if="!userStore.loggedIn" @click="openModal(ModalEnum.LOGIN)" class="text-white text-3xl">Login</button>
   <button v-if="!userStore.loggedIn" @click="openModal(ModalEnum.REGISTER)" class="text-white text-3xl">Register</button>
   <Disclosure as="header" class="bg-[#161417] py-10" v-slot="{ open }">
@@ -128,6 +128,7 @@ import {Bars3Icon, BellIcon, XMarkIcon} from '@heroicons/vue/24/outline';
 import {defineComponent, ref} from 'vue';
 import LoginRegisterModal from '@/components/auth/LoginRegisterModal.vue';
 import LogoutComponent from '@/components/auth/LogoutComponent.vue';
+import {useLogoutFlow} from '@/composables/useLogoutFlow';
 import {ModalEnum} from '@/enums/ModalEnum';
 import {ROUTES} from '@/router/routes';
 import {useUserStore} from '@/stores/user';
@@ -181,6 +182,7 @@ export default defineComponent({
       ModalEnum,
       openModal,
       userStore,
+      useLogoutFlow,
     };
   },
 });

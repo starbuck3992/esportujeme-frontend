@@ -89,7 +89,6 @@ export default defineComponent({
       error.value = '';
       try {
         if (await v$.value.$validate()) {
-          await Api.sanctumCookie();
           const response = await Api.login(user);
           userStore.updateUser(response.data);
           emit('onFinished');

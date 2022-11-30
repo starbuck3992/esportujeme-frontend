@@ -144,7 +144,6 @@ export default defineComponent({
       error.value = '';
       try {
         if (await v$.value.$validate()) {
-          await Api.sanctumCookie();
           const response = await Api.register(user);
           userStore.updateUser(response);
           registrationSuccessful.value = true;

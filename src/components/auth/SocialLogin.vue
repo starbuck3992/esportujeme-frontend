@@ -31,7 +31,6 @@ export default defineComponent({
     };
     onMounted(async () => {
       try {
-        await Api.sanctumCookie();
         const response = await Api.socialLogin(payload);
         userStore.updateUser(response.data);
         window.location.href = response.data.meta.url;

@@ -1,4 +1,4 @@
-import axios, {AxiosInstance, AxiosResponse} from 'axios';
+import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 import router from '@/router';
 import {ROUTES} from '@/router/routes';
 import store from '@/stores/store';
@@ -12,7 +12,22 @@ class Api {
       baseURL: import.meta.env.VITE_API_URL,
       withCredentials: true,
     });
+    this.apiInstance.interceptors.request.use(this.handleRequestSuccess, this.handleRequestError);
     this.apiInstance.interceptors.response.use(this.handleResponseSuccess, this.handleResponseError);
+  }
+
+  handleRequestSuccess(config: AxiosRequestConfig): AxiosRequestConfig {
+    const userStore = useUserStore(store);
+    const token = userStore.token;
+
+    config.headers = config.headers ?? {};
+    config.headers.Authorization = `Bearer ${token}`;
+
+    return config;
+  }
+
+  handleRequestError(error: any): Promise<any> {
+    return Promise.reject(error);
   }
 
   handleResponseSuccess(response: AxiosResponse): AxiosResponse {
@@ -40,15 +55,15 @@ class Api {
   }
 
   register(payload) {
-    return this.apiInstance.post('/register', payload);
+    return this.apiInstance.post('/api/register', payload);
   }
 
   login(payload) {
-    return this.apiInstance.post('/login', payload);
+    return this.apiInstance.post('/api/login', payload);
   }
 
   logout() {
-    return this.apiInstance.post('/logout');
+    return this.apiInstance.post('/api/logout');
   }
 
   forgotPassword(payload) {

@@ -6,7 +6,7 @@ export const handleError = (error: any) => {
   const {setNotification} = useNotificationStore();
 
   if (!isNil(error.response.data)) {
-    if (error.response.status === 422) {
+    if (error.response.status === 422 || error.response.status === 401) {
       return error.response.data.message;
     } else {
       setNotification(NotificationEnum.ERROR, error.response.message);

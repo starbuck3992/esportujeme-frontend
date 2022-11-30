@@ -3,6 +3,7 @@ import SocialLogin from '@/components/auth/SocialLogin.vue';
 import {LayoutEnum} from '@/layout/LayoutEnum';
 import DashboardPage from '@/views/admin/DashboardPage.vue';
 import HomePage from '@/views/public/HomePage.vue';
+import TournamentPage from '@/views/public/tournament/TournamentPage.vue';
 import UserIntegrationsPage from '@/views/public/user/UserIntegrationsPage.vue';
 import UserPasswordPage from '@/views/public/user/UserPasswordPage.vue';
 import UserProfilePage from '@/views/public/user/UserProfilePage.vue';
@@ -16,6 +17,7 @@ export enum ROUTES {
   USER_PROFILE_PAGE = 'routesUserProfilePage',
   USER_PASSWORD_PAGE = 'routesUserPasswordPage',
   USER_INTEGRATIONS_PAGE = 'routesUserIntegrationsPage',
+  TOURNAMENTS_PAGE = 'routesTournamentsPage',
 }
 
 const routes = [
@@ -39,7 +41,6 @@ const routes = [
         name: ROUTES.HOME_PAGE,
         component: HomePage,
       },
-
       {
         path: 'settings',
         name: ROUTES.USER_SETTINGS_ROUTER_VIEW,
@@ -63,6 +64,13 @@ const routes = [
             name: ROUTES.USER_INTEGRATIONS_PAGE,
             component: UserIntegrationsPage,
           },
+        ],
+      },
+      {
+        path: 'tournaments',
+        name: ROUTES.TOURNAMENTS_PAGE,
+        component: TournamentPage,
+        children: [
         ],
       },
       {

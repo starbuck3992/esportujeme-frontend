@@ -8,7 +8,6 @@ export const useLogoutFlow = async () => {
   const userStore = useUserStore();
 
   try {
-    await Api.sanctumCookie();
     await Api.logout();
     userStore.clearUser();
     await router.push({
