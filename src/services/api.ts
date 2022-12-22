@@ -50,10 +50,6 @@ class Api {
     return Promise.reject(error);
   }
 
-  sanctumCookie() {
-    return this.apiInstance.get('/sanctum/csrf-cookie');
-  }
-
   register(payload) {
     return this.apiInstance.post('/api/register', payload);
   }

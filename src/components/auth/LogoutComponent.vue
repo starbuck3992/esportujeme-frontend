@@ -19,7 +19,6 @@ export default defineComponent({
 
     async function logout() {
       try {
-        await Api.sanctumCookie();
         await Api.logout();
         userStore.clearUser();
         await router.push({

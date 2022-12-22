@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded-2xl divide-y-2 px-2">
+  <div class="match bg-white rounded-2xl divide-y-2 px-2 w-48">
     <div class="flex justify-between py-4">
       <div class="flex flex-none">
       <img :src="teamOne.image" alt="" class="h-6 w-6 flex-shrink-0 rounded-full" />

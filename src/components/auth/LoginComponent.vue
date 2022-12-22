@@ -63,8 +63,8 @@ export default defineComponent({
     const error = ref<string>();
 
     const user = reactive({
-      email: '',
-      password: '',
+      email: 'user1@esportujeme.cz',
+      password: 'esportujeme',
       remember: true,
     });
 
@@ -90,7 +90,7 @@ export default defineComponent({
       try {
         if (await v$.value.$validate()) {
           const response = await Api.login(user);
-          userStore.updateUser(response.data);
+          userStore.updateUser(response.data.data);
           emit('onFinished');
         }
       } catch (e: any) {
