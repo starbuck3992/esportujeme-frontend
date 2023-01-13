@@ -99,6 +99,10 @@ class Api {
       'Content-Type': 'multipart/form-data',
     }});
   }
+
+  getTournament(slug) {
+    return this.apiInstance.get(`/api/tournaments/${slug}`);
+  }
 }
 
 export default new Api();

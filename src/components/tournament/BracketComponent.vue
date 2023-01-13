@@ -57,12 +57,52 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
-import MatchComponent from '@/components/tournament/MatchComponent.vue';
+import {defineComponent, PropType} from 'vue';
+import MatchComponent from '@/components/tournament/MatchComponent.vue';<
+
+interface TournamentMatch {
+  bracketPosition: number,
+  scoreHome: number | null,
+  scoreGuest: number | null,
+  about: string,
+  avatar: string,
+  avatarFile: File | null,
+  name: string,
+  surname: string,
+}
+
+{
+  "bracketPosition": 3,
+  "scoreHome": 1,
+  "scoreGuest": 5,
+  "userHome": {
+  "nick": null,
+    "email": "user2@esportujeme.cz",
+    "playstationProfile": null,
+    "xboxProfile": null
+},
+  "userGuest": {
+  "nick": null,
+    "email": "user1@esportujeme.cz",
+    "playstationProfile": null,
+    "xboxProfile": null
+},
+  "screenshotHome": null,
+  "screenshotGuest": {
+  "path": "/storage/images/tournaments/vanocni-turnaj-2023/s7LCPHduAyD0V4G69pHLU3CcK50OzX4TuWO9eCIo.png"
+}
+}
+
 
 export default defineComponent({
   components: {
     MatchComponent,
+  },
+  props: {
+    matches: {
+      type: Array as PropType<Array<TournamentMatch>>,
+      required: true,
+    },
   },
   setup() {
     return {};

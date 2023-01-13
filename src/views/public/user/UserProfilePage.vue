@@ -195,8 +195,8 @@ export default defineComponent({
     async function loadData() {
       try {
         const response = await Api.userSettings();
-        Object.assign(formData, response.data.data);
-        Object.assign(originalData, response.data.data);
+        Object.assign(formData, response.data);
+        Object.assign(originalData, response.data);
       } catch (e) {
         handleError(e);
       }

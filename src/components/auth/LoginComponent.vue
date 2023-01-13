@@ -90,7 +90,7 @@ export default defineComponent({
       try {
         if (await v$.value.$validate()) {
           const response = await Api.login(user);
-          userStore.updateUser(response.data.data);
+          userStore.updateUser(response.data);
           emit('onFinished');
         }
       } catch (e: any) {
